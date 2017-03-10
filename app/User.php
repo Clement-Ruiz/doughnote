@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function notables() //relation n/n
+    {
+        return $this->belongsToMany('App\Notable', 'user_notable', 'user_id', 'notable_id')->withPivot('note');
+    }
 }
