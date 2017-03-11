@@ -29,4 +29,9 @@ class Commentaire extends Model
     {
         return $this->belongsTo("App\User", "user_id", "id");
     }
+
+    public function note()
+    {
+        return $this->belongsTo("App\Note", "user_id", "id");
+    }
 }

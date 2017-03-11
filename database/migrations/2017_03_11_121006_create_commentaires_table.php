@@ -14,6 +14,7 @@ class CreateCommentairesTable extends Migration
     public function up()
     {
         Schema::create('commentaires', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->string('auteur');
             $table->string('content');
