@@ -16,11 +16,14 @@ class CreateUsersTable extends Migration
         Schema::create('users', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('nom')->nullable();
-            $table->string('prenom')->nullable();
+            $table->string('nom');
+            $table->string('prenom');
+            $table->date('birth_date')->nullable();
             $table->string('email');
             $table->string('login');
-            $table->text('password');
+            $table->string('password');
+            $table->string('type');
+            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -34,7 +37,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        DB::statement("SET FOREIGN_KEY_CHECKS=0");
         Schema::dropIfExists('users');
     }
 }

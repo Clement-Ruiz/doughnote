@@ -16,12 +16,13 @@ class CreateCommentairesTable extends Migration
         Schema::create('commentaires', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->increments('id');
-            $table->string('auteur');
+            $table->integer('author_id')->unsigned();
             $table->string('content');
-            $table->integer('user_id')->unsigned();
+            $table->integer('parent_id')->nullable();
             $table->boolean('active');
-            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
+            $table->foreign("author_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign('parent_id')->references("id")->on('commentaires')->onDelete('cascade')->onUpdate("cascade");
         });
     }
 
