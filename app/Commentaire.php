@@ -32,8 +32,7 @@ class Commentaire extends Model
     }
 
     public function tags(){
-        return $this->belongsToMany("App\Tag", "com_to_tag", "comment_id", "tag_id")
-            ->withTimestamps();
+        return $this->belongsToMany("App\Tag", "com_to_tag", "comment_id", "tag_id");
     }
 
 }

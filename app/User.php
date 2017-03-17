@@ -13,22 +13,25 @@ class User extends Authenticatable
     protected $hidden = array('password', 'remember_token');
     public static $rules = array(
         "create" => array(
-            "nom" => "required|string|min:2",
-            "prenom" => "required|string|min:2",
+            "nom" => "required|string|min:2|regex:/^[a-zA-Z-' ]$/",
+            "prenom" => "required|string|min:2|regex:/^[a-zA-Z-' ]$/",
             'email' => 'required|email|unique:users',
-            "login" => 'required|string|min:2|unique:users',
+            "login" => 'required|string|min:2|unique:users|alpha_dash',
             'password' => 'required|string|min:8',
             'birth_date' => 'string',
-            'type' => 'required|string',
+            'type' => 'required|string|regex:/eleve|prof|admin/',
             'avatar' => 'url'
         ),
         "update" => array(
-            "nom" => "string|min:2",
-            "prenom" => "string|min:2",
+            "nom" => "string|min:2|regex:/^[a-zA-Z-' ]$",
+            "prenom" => "string|min:2|regex:/^[a-zA-Z-' ]$",
             'email' => 'email|unique:users',
-            'password' => 'string|min:8',
-            'birth_date' => 'string|min:5',
+            'password' => 'required|string|min:8',
+            'birth_date' => 'string',
             'avatar' => 'url'
+        ),
+        "avatarUpdate" => array(
+            "avatar" => 'url|required'
         )
     );
 
