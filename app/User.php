@@ -51,7 +51,8 @@ class User extends Authenticatable
         return $this->hasMany("App\Commentaire", "user_id", "id");
     }
 
-    public function tags(){
-        return $this->belongsToMany("App\Tag", "user_tag", "user_id", "tag_id");
+    public function matieres()
+    {
+        return $this->belongsToMany("App/Matieres", "prof_to_mat", "teacher_id", "mat_id")
     }
 }
