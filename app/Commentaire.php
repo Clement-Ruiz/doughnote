@@ -31,7 +31,8 @@ class Commentaire extends Model
         return $this->belongsTo("App\User", "users", "author_id", "id");
     }
 
-    public function tags(){
+    public function tags()
+    {
         return $this->belongsToMany("App\Tag", "com_to_tag", "comment_id", "tag_id");
     }
 
