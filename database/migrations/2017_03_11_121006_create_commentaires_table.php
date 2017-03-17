@@ -22,7 +22,6 @@ class CreateCommentairesTable extends Migration
             $table->boolean('active');
             $table->timestamps();
             $table->foreign("author_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
-            $table->foreign('parent_id')->references("id")->on('commentaires')->onDelete('cascade')->onUpdate("cascade");
         });
     }
 

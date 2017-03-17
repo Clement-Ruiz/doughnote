@@ -27,7 +27,8 @@ class User extends Authenticatable
             "prenom" => "string|min:2",
             'email' => 'email|unique:users',
             'password' => 'string|min:8',
-            'birth_date' => 'string|min:5'
+            'birth_date' => 'string|min:5',
+            'avatar' => 'url'
         )
     );
 
@@ -53,6 +54,6 @@ class User extends Authenticatable
 
     public function matieres()
     {
-        return $this->belongsToMany("App/Matieres", "prof_to_mat", "teacher_id", "mat_id")
+        return $this->belongsToMany("App\Matieres", "prof_to_mat", "teacher_id", "mat_id");
     }
 }

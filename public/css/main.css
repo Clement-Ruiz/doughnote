@@ -1,0 +1,47 @@
+.preloader-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2e3436;
+
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.transparent{
+    box-shadow: none!important;
+    font-family: 'Indie Flower', cursive;
+}
+
+body {
+    background-color: #2e3436;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.page-footer{
+    box-shadow: #00b8d4!important;
+}
+
+.titre{
+    font-family: 'Indie Flower', cursive!important;
+}
+
+.titre-card{
+    font-family: 'Indie Flower', cursive!important;
+    font-size: 35px!important;
+}
+
+.image{
+    padding-left: 1%;
+    height: 7%;
+    width: 7%;
+}

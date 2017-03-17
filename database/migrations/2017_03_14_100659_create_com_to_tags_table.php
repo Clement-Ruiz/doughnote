@@ -18,7 +18,7 @@ class CreateComToTagsTable extends Migration
             $table->integer('comment_id')->unsigned();
             $table->integer('tag_id')->unsigned();
             $table->foreign('comment_id')->references('id')->on('commentaires')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreing('tag_id')->references('id')->on('tags')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
