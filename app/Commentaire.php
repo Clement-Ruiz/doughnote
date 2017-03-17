@@ -6,31 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Commentaire extends Model
 {
-    protected $fillable = array('auteur', 'content', 'user_id', 'created_at', 'updated_at', 'active');
+    protected $table="commentaires";
+    protected $fillable = array('auteur', 'content', 'user_id', 'active');
     public static $rules =  array(
         "create" => array(
-            "user_id" => 'required|integer',
-            "auteur" => 'required|string',
+            "author_id" => 'required|integer',
             "content" => 'required|string',
+            "parent_id" => 'required|string',
             "active" => 'boolean'
         ),
         "update" => array(
-            "user_id" => 'required|integer',
-            "auteur" => 'required|string',
+            "author_id" => 'required|integer',
             "content" => 'required|string',
+            "parent_id" => 'required|integer',
             "active" => 'boolean'
         ),
-        "valide" => array(
+        "activate" => array(
             "active" => 'boolean'
         )
     );
     
     public function user()
     {
-        return $this->belongsTo("App\User", "user_id", "id");
+        return $this->belongsTo("App\User", "users", "author_id", "id");
     }
 
     public function tags(){
-        return $this->belongsToMany("App\Tag", "com_to_tag", "comment_id", "tag_id");
+        return $this->belongsToMany("App\Tag", "com_to_tag", "comment_id", "tag_id")
+            ->withTimestamps();
     }
+
 }
