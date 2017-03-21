@@ -17,12 +17,24 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function() {
 	Route::group(['middleware' => 'isAdmin', 'namespace' => 'Admin'], function() {
-		Route::ressource('admin', 'AdminsController');
+		Route::ressource('admin', 'AdminsController', [
+			'except' => ['profil']
+			]);
+		Route::get('profil/{user}', function(){
+		});
 	})
-	Route::group(['middleware' => 'isProf', 'namespace' => 'Prof', 'prefix' => 'Prof'], function() {
-		Route::ressource('prof', 'ProfsController');
+	Route::group(['middleware' => 'isProf', 'namespace' => 'Prof'], function() {
+		Route::ressource('prof', 'ProfsController', [
+			'except' => ['profil']
+			]);
+		Route::get('profil/{user}', function(){
+		});
 	})
-	Route::group(['middleware' => 'isEleve', 'namespace' => 'Eleve', 'prefix' => 'Eleve'], function() {
-		Route::ressource('eleve', 'ElevesController');
+	Route::group(['middleware' => 'isEleve', 'namespace' => 'Eleve'], function() {
+		Route::ressource('eleve', 'ElevesController', [
+			'except' => ['profil']
+			]);
+		Route::get('profil/{user}', function(){
+		});
 	})
 })
