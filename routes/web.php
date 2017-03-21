@@ -15,3 +15,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => 'auth'], function() {
+    Route::group(['middleware' => 'isAdmin', 'namespace' => 'Admin'], function() {
+        Route::resource('admin', 'AdminsController', [
+            'except' => ['profil']
+        ]);
+        Route::get('profil/{user}', function(){
+        });
+    });
+  Route::group(['middleware' => 'isProf', 'namespace' => 'Prof'], function() {
+      Route::resource('prof', 'ProfsController', [
+          'except' => ['profil']
+      ]);
+      Route::get('profil/{user}', function(){
+      });
+  });
+  Route::group(['middleware' => 'isEleve', 'namespace' => 'Eleve'], function() {
+      Route::resource('eleve', 'ElevesController', [
+          'except' => ['profil']
+      ]);
+      Route::get('profil/{user}', function(){
+      });
+  });
+});
