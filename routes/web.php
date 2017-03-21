@@ -19,12 +19,13 @@ Route::get('/test', function () {
     return view('test');
 });
 
+/*
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'hasType:admin', 'namespace' => 'Admin'], function() {
         Route::resource('admin', 'AdminsController', [
             'except' => ['profil']
         ]);
-        Route::resource('matiere.note', '')
+        Route::resource('matiere.note', 'MatieresNotesController')
         Route::get('profil/{user}', function(){
         });
     });
@@ -43,3 +44,4 @@ Route::group(['middleware' => 'auth'], function() {
       });
   });
 });
+*/
