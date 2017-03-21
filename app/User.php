@@ -62,8 +62,15 @@ class User extends Authenticatable
 
     // Fonctions perso
 
-    public function hasRole($role)
+    public function moyenneGenerale()
     {
-        
+        $notes = $this->notes();
+        $points = 0;
+        $coefs = 0;
+        foreach ($notes as $note){
+            $points += ($note->note/$note->max_note) * 20 * $note->coef;
+            $coefs += $note->coef;
+        }
+        return $points/$coefs;
     } 
 }
