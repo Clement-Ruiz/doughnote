@@ -15,6 +15,10 @@ class isAdmin
      */
     public function handle($request, Closure $next)
     {
+        if(! $request->user()->hasType('admin'))
+        {
+            return redirect('welcome');
+        }
         return $next($request);
     }
 }
