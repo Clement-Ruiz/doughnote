@@ -59,4 +59,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany("App\Matieres", "prof_to_mat", "teacher_id", "mat_id");
     }
+
+    // Fonctions perso
+
+    public function hasRole($role)
+    {
+        
+    } 
 }

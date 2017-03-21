@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\\Eleve;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TagsController extends Controller
+class AdminsController extends Controller
 {
     /**
      * Display a listing of the resource.

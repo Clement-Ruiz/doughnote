@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\prof;
+namespace App\Http\Controllers\Eleve;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CommentairesController extends Controller
+class ElevesController extends Controller
 {
     /**
      * Display a listing of the resource.
