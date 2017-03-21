@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => 'auth'], function() {
+	Route::group(['middleware' => 'isAdmin', 'namespace' => 'Admin'], function() {
+		Route::ressource('admin', 'AdminsController');
+	})
+	Route::group(['middleware' => 'isProf', 'namespace' => 'Prof', 'prefix' => 'Prof'], function() {
+		Route::ressource('prof', 'ProfsController');
+	})
+	Route::group(['middleware' => 'isEleve', 'namespace' => 'Eleve', 'prefix' => 'Eleve'], function() {
+		Route::ressource('eleve', 'ElevesController');
+	})
+})
