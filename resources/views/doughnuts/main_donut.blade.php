@@ -13,23 +13,40 @@
 <main>
 <nav class="transparent">
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Doughtnuts</a>
+        <a href="#!" class="brand-logo"><img src="img/DoughnutsRose.svg" alt="donutmarron" class="responsive-img image-nav left valign">Doughnote</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down navbar-fixed">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+            <li><a href="#modal1">Se connecter</a></li>
         </ul>
-        <ul class="side-nav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+        <ul class="side-nav yellow lighten-5" id="mobile-demo">
+            <li><a href="#modal1">Se connecter</a></li>
         </ul>
     </div>
 </nav>
 
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal yellow lighten-5">
+        <div class="container">
+        <div class="modal-content">
+            <p class="flow-text center titre">Se connecter</p>
+           <form method="GET" action="">
+               <div class="input-field center">
+                   <input id="first_name" type="text" class="validate center" name="login" required>
+                   <label for="first_name" class="pink-text text-darken-1">Nom d'utilisateur</label>
+               </div>
+               <div class="input-field center">
+                   <input id="password" type="password" class="validate center" name="password" required>
+                   <label for="password" class="pink-text text-darken-1">Mot de passe</label>
+               </div>
+               <input type="hidden" name="_token" value={{ csrf_token() }}>
+        <div class="modal-footer yellow lighten-5">
+            <button type="submit" class="waves-effect waves-green right btn brown darken-3">Valider</button>
+        </div>
+           </form>
+        </div>
+        </div>
+    </div>
 
 
 
@@ -58,16 +75,13 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                <h5 class="white-text">Doughnote</h5>
+                <p class="grey-text text-lighten-4">Site de notes et de commentaires de classe</p>
             </div>
             <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
+                <h5 class="white-text">Liens</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    <li><a href="#modal1">Se connecter</a></li>
                 </ul>
             </div>
         </div>
@@ -75,7 +89,6 @@
     <div class="footer-copyright">
         <div class="container">
             © 2017 Copyright Doughtnuts
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
     </div>
 
@@ -83,8 +96,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
     <script>
         $( document ).ready(function(){
+            $('.modal').modal()
             $(".button-collapse").sideNav();
                 $('.preloader-background').delay(1700).fadeOut('slow');
+
+                @yield('modal')
 
                 $('.preloader-wrapper')
                     .delay(1700)
