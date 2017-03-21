@@ -15,22 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
+/*
 Route::group(['middleware' => 'auth'], function() {
-    Route::group(['middleware' => 'isAdmin', 'namespace' => 'Admin'], function() {
+    Route::group(['middleware' => 'hasType:admin', 'namespace' => 'Admin'], function() {
         Route::resource('admin', 'AdminsController', [
             'except' => ['profil']
         ]);
+        Route::resource('matiere.note', 'MatieresNotesController')
         Route::get('profil/{user}', function(){
         });
     });
-  Route::group(['middleware' => 'isProf', 'namespace' => 'Prof'], function() {
+  Route::group(['middleware' => 'hasType:prof', 'namespace' => 'Prof'], function() {
       Route::resource('prof', 'ProfsController', [
           'except' => ['profil']
       ]);
       Route::get('profil/{user}', function(){
       });
   });
-  Route::group(['middleware' => 'isEleve', 'namespace' => 'Eleve'], function() {
+  Route::group(['middleware' => 'hasType;eleve', 'namespace' => 'Eleve'], function() {
       Route::resource('eleve', 'ElevesController', [
           'except' => ['profil']
       ]);
@@ -38,3 +44,4 @@ Route::group(['middleware' => 'auth'], function() {
       });
   });
 });
+*/

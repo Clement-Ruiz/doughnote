@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class isAdmin
+class hasType
 {
     /**
      * Handle an incoming request.
@@ -13,9 +13,9 @@ class isAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, ...$params)
     {
-        if(! $request->user()->hasType('admin'))
+        if(! $request->user()->hasType($params[0]))
         {
             return redirect('welcome');
         }
