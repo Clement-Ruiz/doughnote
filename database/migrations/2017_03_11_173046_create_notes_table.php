@@ -20,7 +20,7 @@ class CreateNotesTable extends Migration
             $table->integer('teacher_id')->unsigned();
             $table->integer('note')->unsigned();
             $table->integer('max_note')->unsigned();
-            $table->float('coef')->unsigned();
+            $table->float('coef')->unsigned()->default(1);
             $table->timestamps();
             $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

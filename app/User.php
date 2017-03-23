@@ -71,6 +71,7 @@ class User extends Authenticatable
             $points += ($note->note/$note->max_note) * 20 * $note->coef;
             $coefs += $note->coef;
         }
-        return $points/$coefs;
+        if($coefs!=0) return $points/$coefs;
+        else return null;
     } 
 }

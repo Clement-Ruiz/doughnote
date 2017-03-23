@@ -36,4 +36,5 @@ class Commentaire extends Model
         return $this->belongsToMany("App\Tag", "com_to_tag", "comment_id", "tag_id");
     }
 
+
 }
