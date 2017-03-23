@@ -38,8 +38,7 @@
                         </div>
                     </div>
                     <div class="card-content grey-text text-darken-3">
-                        <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
+                        @include('doughnuts.studentslist')
                     </div>
                 </div>
             </div>

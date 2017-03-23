@@ -16,3 +16,7 @@ body{
 .encap{
     position: relative;
 }
+.titre{
+    font-size: 40px;
+    color: #78F1FE!important;
+}

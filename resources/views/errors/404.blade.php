@@ -9,9 +9,9 @@
 <img src="img/DoughnutsJaune.svg" alt="donut bleu" class="img-side left">
 <img src="img/DoughnutsJaune.svg" alt="donut bleu" class="img-side right">
 <div class="center">
-<h1 class="center white-text">Erreur 404</h1>
+<h1 class="center titre">Erreur 404</h1>
         <img src="img/Yannick.png" alt="donut chien" class="img" id="yannick">
-    <p class="flow-text white-text">You shall note pass</p>
+    <p class="titre">You shall note pass !</p>
 </div>
 <img src="img/DoughnutsJaune.svg" alt="donut bleu" class="img-side left">
 <img src="img/DoughnutsJaune.svg" alt="donut bleu" class="img-side right">
@@ -44,6 +44,6 @@
             document.getElementById("status").innerHTML = "rotate("+degrees+"deg)";
         }
     </script>
-    <script>rotateAnimation("yannick",10);</script>
+    <script>rotateAnimation("yannick",9);</script>
 </footer>
 </html>
