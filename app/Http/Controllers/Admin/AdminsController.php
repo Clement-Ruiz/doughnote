@@ -14,7 +14,7 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -72,6 +72,14 @@ class AdminsController extends Controller
         //
     }
 
+    /**
+      * Return the view with the list of all the students
+      */
+    public function listeEtudiant()
+    {
+      return view('listeEtudiant');
+    }
+    
     /**
      * Remove the specified resource from storage.
      *

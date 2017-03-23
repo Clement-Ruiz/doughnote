@@ -21,22 +21,14 @@ Route::get('/test', function () {
 
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'hasType:admin', 'namespace' => 'Admin'], function() {
-        Route::resource('admin', 'AdminsController', [
-            'except' => ['profil']
-        ]);
-        Route::resource('matiere.note', 'MatieresNotesController');
-        Route::get('profil/{user}', "AdminControllers@profil");
+        //Routes uniquement Admin
     });
     Route::group(['middleware' => 'hasType:prof', 'namespace' => 'Prof'], function() {
-        Route::resource('prof', 'ProfsController', [
-            'except' => ['profil']
-        ]);
-        Route::get('profil/{user}', "ProfControllers@profil");
+        //Routes uniquement prof
     });
     Route::group(['middleware' => 'hasType:eleve', 'namespace' => 'Eleve'], function() {
-        Route::resource('eleve', 'ElevesController', [
-            'except' => ['profil']
-        ]);
-        Route::get('profil/{user}', "ElevesController@profil");
+        //Routes uniquement eleve
     });
+
+    Route::get('listeEtudiant', 'UsersController@index');
 });
