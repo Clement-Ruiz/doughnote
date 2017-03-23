@@ -73,5 +73,14 @@ class User extends Authenticatable
         }
         if($coefs!=0) return $points/$coefs;
         else return null;
-    } 
+    }
+
+    public function is($roleName)
+    {
+        if ($this->type == $roleName)
+        {
+            return true;
+        }
+        return false;
+    }
 }
