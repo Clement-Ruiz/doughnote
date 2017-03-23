@@ -26,9 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'hasType:prof', 'namespace' => 'Prof'], function() {
         //Routes uniquement prof
     });
-    Route::group(['middleware' => 'hasType:eleve', 'namespace' => 'Eleve'], function() {
-        //Routes uniquement eleve
-    });
 
+        //Routes utilisateurs authentifiés
     Route::get('listeEtudiant', 'UsersController@index');
 });

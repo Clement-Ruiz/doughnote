@@ -17,7 +17,7 @@ class hasType
     {
         if(! $request->user()->is($params[0]))
         {
-            return redirect('welcome');
+            return redirect('welcome')->with("You don't have access here");
         }
         return $next($request);
     }

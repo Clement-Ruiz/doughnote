@@ -64,14 +64,15 @@ class User extends Authenticatable
 
     public function moyenneGenerale()
     {
-        $notes = $this->notes();
-        $points = 0;
-        $coefs = 0;
-        foreach ($notes as $note){
-            $points += ($note->note/$note->max_note) * 20 * $note->coef;
-            $coefs += $note->coef;
+        if($notes = $this->notes()){
+            $points = 0;
+            $coefs = 0;
+            foreach ($notes as $note) {
+                $points += ($note->note / $note->max_note) * 20 * $note->coef;
+                $coefs += $note->coef;
+            }
+            return $points / $coefs;
         }
-        if($coefs!=0) return $points/$coefs;
         else return null;
     }
 

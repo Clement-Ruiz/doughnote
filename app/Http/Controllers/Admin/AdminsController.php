@@ -24,7 +24,7 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +35,7 @@ class AdminsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -46,7 +46,7 @@ class AdminsController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
