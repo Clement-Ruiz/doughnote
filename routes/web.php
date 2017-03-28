@@ -20,13 +20,29 @@ Route::get('/test', function () {
 });
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::group(['middleware' => 'hasType:admin', 'namespace' => 'Admin'], function() {
+    Route::group(['middleware' => 'hasType["type", "admin"]', 'namespace' => 'Admin'], function() {
         //Routes uniquement Admin
+            //Gestion des Profils
+        Route::get('/profile/create', 'UsersController@create');
+        Route::post('/profile/store', 'UsersController@store');
+        Route::post('/profile/{id}/destroy', 'UsersController@destroy');
+
+            //Gestion des Matières
+        Route::get('/matieres/create', 'MatieresController@create');
+        Route::post('/matieres/store', 'MatieresController@store');
+        Route::get('/matieres/{id}/edit', 'MatieresController@edit');
+        Route::post('/matieres/{id}/update', 'MatieresController@update');
+        Route::post('/matieres/{id}/destroy', 'MatieresController@destroy');
     });
-    Route::group(['middleware' => 'hasType:prof', 'namespace' => 'Prof'], function() {
+    Route::group(['middleware' => 'hasType["type", "prof"]', 'namespace' => 'Prof'], function() {
         //Routes uniquement prof
     });
-
         //Routes utilisateurs authentifiés
-    Route::get('listeEtudiant', 'UsersController@index');
+    Route::get('/profile', 'UsersController@index');
+    Route::get('/profile/{id}', "UsersController@show");
+
+
+    Route::post('/profile/{id}/comment/update', 'CommentairesController@update');
+    Route::post('/profile/{id}/comment/destroy', 'CommentairesController@destroy');
+
 });

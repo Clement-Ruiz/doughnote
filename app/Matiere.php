@@ -10,10 +10,10 @@ class Matiere extends Model
     protected $fillable = array('name');
     protected $rules = array(
         "create" => array(
-          "name" => "required|string"
+          "name" => "required|string|unique"
         ),
         "update" => array(
-            "name" => "required|string"
+            "name" => "required|string|unique"
         )
     );
 

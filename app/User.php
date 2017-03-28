@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     use Notifiable;
     protected $table = "users";
-    protected $fillable = array('nom', 'prenom', 'email', 'login', 'password', 'birth_date', 'type', 'avatar' );
+    protected $fillable = array('nom', 'prenom', 'email', 'login', 'password', 'birth_date', 'type', 'avatar');
     protected $hidden = array('password', 'remember_token');
     public static $rules = array(
         "create" => array(
@@ -35,14 +36,14 @@ class User extends Authenticatable
         )
     );
 
-    public function setPasswordAttribut($value)
+    public function setPasswordAttribute($value)
     {
         $this->attributes["password"] = Hash::make($value);
     }
 
-    public function getPasswordAttribut($value)
+    public function getPasswordAttribute()
     {
-        return $this->attributes["password"]."a";
+        return $this->attributes["password"];
     }
 
     public function notes()
@@ -64,7 +65,7 @@ class User extends Authenticatable
 
     public function moyenneGenerale()
     {
-        if($notes = $this->notes()){
+        if ($notes = $this->notes()) {
             $points = 0;
             $coefs = 0;
             foreach ($notes as $note) {
@@ -72,14 +73,12 @@ class User extends Authenticatable
                 $coefs += $note->coef;
             }
             return $points / $coefs;
-        }
-        else return null;
+        } else return null;
     }
 
-    public function is($roleName)
+    public function isHe($roleName)
     {
-        if ($this->type == $roleName)
-        {
+        if ($this->type == $roleName) {
             return true;
         }
         return false;
