@@ -15,7 +15,7 @@ class hasType
      */
     public function handle($request, Closure $next, ...$params)
     {
-        if(! $request->user()->is($params[0]))
+        if(! $request->user()->isRole($params[0]))
         {
             return redirect('welcome')->with("You don't have access here");
         }

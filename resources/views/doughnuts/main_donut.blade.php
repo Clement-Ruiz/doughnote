@@ -11,68 +11,79 @@
 </head>
 
 <main>
-<nav class="transparent">
-    <div class="nav-wrapper">
-        <a href="#!" class="brand-logo"><img src="img/DoughnutsRose.svg" alt="donutmarron" class="responsive-img image-nav left valign">Doughnote</a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            @if(!Auth::check())
-        <ul class="right hide-on-med-and-down navbar-fixed">
-            <li><a href="#modal1">Se connecter</a></li>
-        </ul>
-        <ul class="side-nav yellow lighten-5" id="mobile-demo">
-            <li><a href="#modal1">Se connecter</a></li>
-        </ul>
-                @elseif(Auth::check('admin'))
+    <nav class="transparent">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo"><img src="img/DoughnutsRose.svg" alt="donutmarron" class="responsive-img image-nav left valign">Doughnote</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down navbar-fixed">
-                <li><a href="#modal1">Bonjour Admin</a></li>
-            </ul>
-        @endif
-    </div>
-</nav>
+            @if(Auth::check())
+                    <li><a href="{{route("listeEtudiant")}}">Liste Etudiants</a></li>
+                @if(Auth::user()->isRole('admin'))
+                        <li><a href="{{route("deconnexion")}}">Bonjour admin</a></li>
+                    </ul>
+                @elseif(Auth::user()->isRole('prof'))
+                        <li><a href="{{route("deconnexion")}}">Bonjour prof</a></li>
+                    </ul>
+
+                @else
+                        <li><a href="{{route("deconnexion")}}">Bonjour éléve</a></li>
+                    </ul>
+                @endif
+            @else
+                <ul class="right hide-on-med-and-down navbar-fixed">
+                    <li><a href="#modal1">Se connecter</a></li>
+                </ul>
+                <ul class="side-nav yellow lighten-5" id="mobile-demo">
+                    <li><a href="#modal1">Se connecter</a></li>
+                </ul>
+
+            @endif
+        </div>
+    </nav>
 
 
     <!-- Modal Structure -->
     <div id="modal1" class="modal yellow lighten-5">
         <div class="container">
-        <div class="modal-content">
-            <p class="flow-text center titre">Se connecter</p>
-           <form method="POST" action="{{ route("connexion") }}">
-               <div class="input-field center">
-                   <input id="first_name" type="text" class="validate center" name="login" required>
-                   <label for="first_name" class="pink-text text-darken-1">Nom d'utilisateur</label>
-               </div>
-               <div class="input-field center">
-                   <input id="password" type="password" class="validate center" name="password" required>
-                   <label for="password" class="pink-text text-darken-1">Mot de passe</label>
-               </div>
-               <input type="hidden" name="_token" value={{ csrf_token() }}>
-        <div class="modal-footer yellow lighten-5">
-            <button type="submit" class="waves-effect waves-green right btn brown darken-3">Valider</button>
-        </div>
-           </form>
-        </div>
-        </div>
-    </div>
-
-
-
-<div class="preloader-background">
-    <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-yellow-only">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
+            <div class="modal-content">
+                <p class="flow-text center titre">Se connecter</p>
+                <form method="POST" action="{{ route("connexion") }}">
+                    <div class="input-field center">
+                        <input id="first_name" type="text" class="validate center" name="login" required>
+                        <label for="first_name" class="pink-text text-darken-1">Nom d'utilisateur</label>
+                    </div>
+                    <div class="input-field center">
+                        <input id="password" type="password" class="validate center" name="password" required>
+                        <label for="password" class="pink-text text-darken-1">Mot de passe</label>
+                    </div>
+                    <input type="hidden" name="_token" value={{ csrf_token() }}>
+                    <div class="modal-footer yellow lighten-5">
+                        <button type="submit" class="waves-effect waves-green right btn brown darken-3">Valider</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
 
-@yield('content')
+
+
+    <div class="preloader-background">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-yellow-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @yield('content')
 
 </main>
 
@@ -104,13 +115,13 @@
         $( document ).ready(function(){
             $('.modal').modal()
             $(".button-collapse").sideNav();
-                $('.preloader-background').delay(1700).fadeOut('slow');
+            $('.preloader-background').delay(1700).fadeOut('slow');
 
-                @yield('modal')
+            @yield('modal')
 
-                $('.preloader-wrapper')
-                    .delay(1700)
-                    .fadeOut();
+            $('.preloader-wrapper')
+                .delay(1700)
+                .fadeOut();
         });
     </script>
 

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -17,7 +18,7 @@ class User extends Authenticatable
             "prenom" => "required|string|min:2|regex:/^[a-zA-Z-' ]$/",
             'email' => 'required|email|unique:users',
             "login" => 'required|string|min:2|unique:users|alpha_dash',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:6',
             'birth_date' => 'string',
             'type' => 'required|string|regex:/eleve|prof|admin/',
             'avatar' => 'url'
@@ -26,7 +27,7 @@ class User extends Authenticatable
             "nom" => "string|min:2|regex:/^[a-zA-Z-' ]$",
             "prenom" => "string|min:2|regex:/^[a-zA-Z-' ]$",
             'email' => 'email|unique:users',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:6',
             'birth_date' => 'string',
             'avatar' => 'url'
         ),
@@ -35,15 +36,12 @@ class User extends Authenticatable
         )
     );
 
-    public function setPasswordAttribut($value)
+    public function setPasswordAttribute($value)
     {
         $this->attributes["password"] = Hash::make($value);
     }
 
-    public function getPasswordAttribut($value)
-    {
-        return $this->attributes["password"]."a";
-    }
+
 
     public function notes()
     {
@@ -76,7 +74,7 @@ class User extends Authenticatable
         else return null;
     }
 
-    public function is($roleName)
+    public function isRole($roleName)
     {
         if ($this->type == $roleName)
         {

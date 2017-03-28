@@ -15,9 +15,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/changepass', function () {
+    return view('changepass');
+});
+
+Route::post('updatepass', array(
+    "as" => "updatepass",
+    "uses" => "LoginController@updatepass"
+));
+
 Route::post('connexion', array(
     "as" => "connexion",
     "uses" => "LoginController@connexion"
+));
+
+Route::get('deconnexion',array(
+   "as"=>"deconnexion",
+    "uses" => "LoginController@deconnexion"
 ));
 
 Route::get('/test', function () {
