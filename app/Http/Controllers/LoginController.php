@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -28,6 +31,7 @@ class LoginController extends Controller
         $rules = array(
         'login'    => 'required|string|min:2|unique:users|alpha_dash',
         'password' => 'required|string|min:8'
+        )
 
         // run the validation rules on the inputs from the form
         $validator = Validator::make($input, $rules);
