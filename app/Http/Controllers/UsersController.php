@@ -69,7 +69,29 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+       $input = $request->all(); 
+       $user_update = User::findOrFail($id);
+       $this->validate($request, User::$rules["update"]);//Valide avec le model
+       $status_update = $user_update->update($input);
+       if($status_update){
+           return redirect(route("/");
+       }
+       else{
+           return redirect("/");
+       }
+    }
+
+    /**
+     * Connect the user
+     *
+     *
+     *
+     *
+     */
+    public function connexion(Request $request)
+    {
         //
+        Auth::doLogin();
     }
 
     /**
