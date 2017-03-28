@@ -7,36 +7,18 @@ use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-
     public function index()
     {
-        return view('listeEtudiants');
+        $users = User::get();
+        return view("UserList", compact("users"));
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        return view('UserShow', $id); // ????????????????????????????????????????
+        $user = User::findOrFail($id);
+        return view("/users/show", compact("user"));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         if(Auth::user()->id == $id){
@@ -48,31 +30,21 @@ class UsersController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         if(Auth::user()->id == $id){
-
+            $input = $request->all(); //Récupère tous les POST
+            $user_update = User::findOrFail($id);
+            $this->validate($request, User::$rules["update"]);  //On vérifie tous les champs du POST
+            $status_update = $user_update->update($input);
+            if($status_update){
+                return redirect(route("profile/".$id, $user_update))->with("success", "Le compte a bien été modifié");
+            } else{
+                return redirect()->back()->with("danger",  "Une erreur est survenue. Surveillez votre saisie");
+            }
         }
         else{
             redirect()->back("Vous ne pouvez pas modifier cet Utilisateur");
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

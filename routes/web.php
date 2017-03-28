@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function() {
     });
     Route::group(['middleware' => 'hasType["type", "prof"]', 'namespace' => 'Prof'], function() {
         //Routes uniquement prof
+
     });
         //Routes utilisateurs authentifiés
     Route::get('/profile', 'UsersController@index');
