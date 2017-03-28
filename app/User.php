@@ -18,7 +18,7 @@ class User extends Authenticatable
             "prenom" => "required|string|min:2|regex:/^[a-zA-Z-' ]$/",
             'email' => 'required|email|unique:users',
             "login" => 'required|string|min:2|unique:users|alpha_dash',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:6',
             'birth_date' => 'string',
             'type' => 'required|string|regex:/eleve|prof|admin/',
             'avatar' => 'url'
@@ -27,7 +27,7 @@ class User extends Authenticatable
             "nom" => "string|min:2|regex:/^[a-zA-Z-' ]$",
             "prenom" => "string|min:2|regex:/^[a-zA-Z-' ]$",
             'email' => 'email|unique:users',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:6',
             'birth_date' => 'string',
             'avatar' => 'url'
         ),
@@ -41,10 +41,7 @@ class User extends Authenticatable
         $this->attributes["password"] = Hash::make($value);
     }
 
-    public function getPasswordAttribute()
-    {
-        return $this->attributes["password"];
-    }
+
 
     public function notes()
     {
@@ -76,7 +73,7 @@ class User extends Authenticatable
         } else return null;
     }
 
-    public function isHe($roleName)
+    public function isRole($roleName)
     {
         if ($this->type == $roleName) {
             return true;
