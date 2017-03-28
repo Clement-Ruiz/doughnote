@@ -15,12 +15,18 @@
     <div class="nav-wrapper">
         <a href="#!" class="brand-logo"><img src="img/DoughnutsRose.svg" alt="donutmarron" class="responsive-img image-nav left valign">Doughnote</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            @if(!Auth::check())
         <ul class="right hide-on-med-and-down navbar-fixed">
             <li><a href="#modal1">Se connecter</a></li>
         </ul>
         <ul class="side-nav yellow lighten-5" id="mobile-demo">
             <li><a href="#modal1">Se connecter</a></li>
         </ul>
+                @elseif(Auth::check('admin'))
+            <ul class="right hide-on-med-and-down navbar-fixed">
+                <li><a href="#modal1">Bonjour Admin</a></li>
+            </ul>
+        @endif
     </div>
 </nav>
 
@@ -30,7 +36,7 @@
         <div class="container">
         <div class="modal-content">
             <p class="flow-text center titre">Se connecter</p>
-           <form method="GET" action="">
+           <form method="POST" action="{{ route("connexion") }}">
                <div class="input-field center">
                    <input id="first_name" type="text" class="validate center" name="login" required>
                    <label for="first_name" class="pink-text text-darken-1">Nom d'utilisateur</label>

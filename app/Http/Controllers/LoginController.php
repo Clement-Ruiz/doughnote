@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
+ 
 class LoginController extends Controller
 {
     /**
@@ -21,64 +24,43 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function connexion(Request $request)
     {
-        //
-    }
+        $input = $request->all();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $rules = array(
+        'login'    => 'required|string|min:2|unique:users|alpha_dash',
+        'password' => 'required|string|min:8'
+        );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        // run the validation rules on the inputs from the form
+        $validator = Validator::make($input, $rules);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        // if the validator fails, redirect back to the form
+        if ($validator->fails()) {
+            return redirect('/')
+            ->withErrors($validator) // send back all errors to the login form
+        } 
+        else 
+        {
+            // create our user data for the authentication
+            $userdata = array(
+                'email'     => $input['login'],
+                'password'  => $input['password']
+                );
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            // attempt to do the login
+            if (Auth::attempt($userdata)) {
+                // validation successful!
+                return Redirect::to('listeEtudiant');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+            } else {        
+
+                // validation not successful, send back to form 
+                return Redirect::to('/');
+
+            }
+
+        }
+    }    
 }
