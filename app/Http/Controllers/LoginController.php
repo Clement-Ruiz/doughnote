@@ -23,18 +23,18 @@ class LoginController extends Controller
      */
     public function connexion(Request $request)
     {
-        $input = $request->all()
+        $input = $request->all();
 
         $rules = array(
         'login'    => 'required|string|min:2|unique:users|alpha_dash',
         'password' => 'required|string|min:8'
 
         // run the validation rules on the inputs from the form
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make($input, $rules);
 
         // if the validator fails, redirect back to the form
         if ($validator->fails()) {
-            return Redirect::to('login')
+            return Redirect::to('/')
             ->withErrors($validator) // send back all errors to the login form
             ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
         } 
@@ -42,8 +42,8 @@ class LoginController extends Controller
         {
             // create our user data for the authentication
             $userdata = array(
-                'email'     => Input::get('email'),
-                'password'  => Input::get('password')
+                'email'     => $input['login'],
+                'password'  => $input['password']
                 );
 
             // attempt to do the login
@@ -54,7 +54,7 @@ class LoginController extends Controller
             } else {        
 
                 // validation not successful, send back to form 
-                return Redirect::to('login');
+                return Redirect::to('/');
 
             }
 
