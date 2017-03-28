@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('connexion', array(
+    "as" => "connexion",
+    "uses" => "UsersController@connexion"
+));
+
 Route::get('/test', function () {
     return view('test');
 });
