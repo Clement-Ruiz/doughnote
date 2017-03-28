@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::post('connexion', array(
     "as" => "connexion",
-    "uses" => "UsersController@connexion"
+    "uses" => "LoginController@connexion"
 ));
 
 Route::get('/test', function () {
