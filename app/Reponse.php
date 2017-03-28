@@ -24,4 +24,14 @@ class Reponse extends Model
             "active" => 'boolean'
         )
     );
+
+    public function author()
+    {
+        return $this->belongsTo("App\User", "users", "author_id", "id");
+    }
+
+    public function target()
+    {
+        return $this->belongsTo("App\User", "users", "comment_id", "id");
+    }
 }

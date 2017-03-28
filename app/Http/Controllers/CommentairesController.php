@@ -2,20 +2,21 @@
 
 namespace App\Http\Controller;
 
+use App\Commentaire;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CommentairesController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request, $id, $author_id)
     {
-        if(Auth::user()->id == $id){
+        if(Auth::user()->id == $author_id){
             $input = $request->all(); //Récupère tous les POST
-            $user_update = User::findOrFail($id);
+            $user_update = Commentaire::findOrFail($id);
             $this->validate($request, User::$rules["update"]);  //On vérifie tous les champs du POST
             $status_update = $user_update->update($input);
             if($status_update){
-                return redirect(route("profile/".$id, $user_update))->with("success", "Le compte a bien été modifié");
+                return redirect()->back()->with("success", "Le compte a bien été modifié");
             } else{
                 return redirect()->back()->with("danger",  "Une erreur est survenue. Surveillez votre saisie");
             }

@@ -32,7 +32,7 @@ class Commentaire extends Model
 
     public function target()
     {
-        return $this->belongsTo("App\User", "users", "comment_id", "id");
+        return $this->belongsTo("App\User", "users", "attached_id", "id");
     }
 
     public function tags()
