@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
@@ -13,7 +13,7 @@
 <main>
     <nav class="transparent">
         <div class="nav-wrapper">
-            <a href="{{url('/')}}" class="brand-logo"><img src="img/DoughnutsRose.svg" alt="donutmarron" class="responsive-img image-nav left valign">Doughnote</a>
+            <a href="{{url('/')}}" class="brand-logo"><img src="../img/DoughnutsRose.svg" alt="donutmarron" class="responsive-img image-nav left valign">Doughnote</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down navbar-fixed">
             @if(Auth::check())
@@ -100,9 +100,9 @@
                 <ul>
                     @if(Auth::check())
                         <li><a href="{{route("deconnexion")}}">Déconnexion</a></li>
-                    @else
-                        <li><a href="#modal1">Se connecter</a></li>
-                    @endif
+                        @else
+                    <li><a href="#modal1">Se connecter</a></li>
+                        @endif
                 </ul>
             </div>
         </div>

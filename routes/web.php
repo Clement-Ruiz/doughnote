@@ -59,7 +59,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     });
         //Routes utilisateurs authentifiés
-    Route::get('/profile', 'UsersController@index');
+    Route::get('/list', 'UsersController@index');
     Route::get('/profile/{id}', "UsersController@show");
 
 
