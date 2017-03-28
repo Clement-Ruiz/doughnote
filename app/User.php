@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function matieres()
     {
-        return $this->belongsToMany("App\Matieres", "prof_to_mat", "teacher_id", "mat_id");
+        return $this->belongsToMany("App\Matiere", "prof_to_mat", "teacher_id", "mat_id");
     }
 
     // Fonctions perso

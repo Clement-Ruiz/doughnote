@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentairesTable extends Migration
+class CreateReponsesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateCommentairesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commentaires', function (Blueprint $table) {
+        Schema::create('reponses', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->increments('id');
             $table->integer('author_id')->unsigned();
             $table->string('content');
-            $table->integer('attached_id')->unsigned();
+            $table->integer('comment_id')->unsigned();
             $table->boolean('active');
             $table->timestamps();
-            $table->foreign("author_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
-            $table->foreign("attached_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign("author_id")->references('id')->on("users")->onDelete('cascade')->onUpdate("cascade");
+            $table->foreign("comment_id")->references("id")->on("commentaires")->onDelete("cascade")->onUpdate("cascade");
         });
     }
 
@@ -33,6 +33,6 @@ class CreateCommentairesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commentaires');
+        Schema::dropIfExists('reponses');
     }
 }
