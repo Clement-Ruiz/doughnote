@@ -8,7 +8,21 @@ use App\Http\Controllers\Controller;
 
 class CommentairesController extends Controller
 {
-    public function store(Request $request, $id, $author_id)
+    public function store($request, $author_id)
+    {
+        if(Auth::user()->id == $author_id){
+            $input = $request->all(); //Récupère tous les POST
+            $this->validate($request, Commentaire::$rules["create"]);  //On vérifie tous les champs du POST
+            $status_create = Commentaire::create($input);          //On crée l'User
+            if($status_create){
+                return redirect()->back();
+            } else{
+                return redirect()->back()->with("danger",  "Une erreur est survenue. Surveillez votre saisie");
+            }
+        }
+    }
+
+    public function update(Request $request, $id, $author_id)
     {
         if(Auth::user()->id == $author_id){
             $input = $request->all(); //Récupère tous les POST
@@ -26,48 +40,15 @@ class CommentairesController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $count= Commentaire::destroy($id);
+        if($count ==1){
+            return redirect()->back()->with("success", "Votre Utilisateur a bien été supprimé");
+        }
+        else{
+            return redirect()->back()->with("danger", "Une erreur est survenue =/");
+        }
     }
 }
