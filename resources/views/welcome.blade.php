@@ -38,7 +38,6 @@
                         </div>
                     </div>
                     <div class="card-content grey-text text-darken-3">
-                        @include('doughnuts.studentslist')
                     </div>
                 </div>
             </div>

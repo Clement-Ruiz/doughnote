@@ -10,7 +10,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::get();
-        return view("UserList", compact("users"));
+        return view("listeEtudiants", compact("users"));
     }
 
     public function create(){
